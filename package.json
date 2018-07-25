@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startserver": "cd backend && nodemon server.js --exec babel-node --presets env,stage-0",
+    "start:client": "cd client && npm start",
+    "start:dev": "concurrently \"npm run-script startserver\" \"npm run-script start:client\""
   },
   "author": "",
   "license": "ISC",
