@@ -3,3 +3,10 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.time {
+  font-size: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #999;
+}
