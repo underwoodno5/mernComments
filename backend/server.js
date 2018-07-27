@@ -56,6 +56,33 @@ router.post('/comments', (req,res)=>{
     });
 });
 
+router.put('comments/:commentId',(req,res)=> {
+    const { commentId } = req.params;
+    if(!commentId){
+        return res.json({success: false, error:'no comment id provided'});
+    }
+    Comment.findById(commentId, (error,comment)=>{
+        if(error) return res.json({success: false, error});
+        const {author, text} = req.body;
+        if (author) comment.author = author;
+        if (text) comment.text = text;
+        comment.save(error => {
+            if (error) return res.json({ success: false, error });
+            return res.json({success: true});
+        });
+    });
+});
+
+router.delete('comments/:commentId',(req,res) => {
+    const {commentId } = req.params;
+    if(!commentId){
+        return res.json({success: false, error: 'no id'});
+    }
+    Comment.remove({__id: commentId },(error, comment)=>{
+        if(error) return res.json({success: false, error});
+        return res.json({success:true});
+    });
+});
 const dbConfig = require('./dbconfig');
 
 mongoose.connect(dbConfig.url, { useNewUrlParser: true })
