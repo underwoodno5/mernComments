@@ -56,7 +56,7 @@ router.post('/comments', (req,res)=>{
     });
 });
 
-router.put('comments/:commentId',(req,res)=> {
+router.put('/comments/:commentId',(req,res)=> {
     const { commentId } = req.params;
     if(!commentId){
         return res.json({success: false, error:'no comment id provided'});
@@ -73,16 +73,17 @@ router.put('comments/:commentId',(req,res)=> {
     });
 });
 
-router.delete('comments/:commentId',(req,res) => {
+router.delete('/comments/:commentId',(req,res) => {
     const {commentId } = req.params;
     if(!commentId){
         return res.json({success: false, error: 'no id'});
     }
-    Comment.remove({__id: commentId },(error, comment)=>{
+    Comment.remove({ _id: commentId },(error, comment)=>{
         if(error) return res.json({success: false, error});
         return res.json({success:true});
     });
 });
+
 const dbConfig = require('./dbconfig');
 
 mongoose.connect(dbConfig.url, { useNewUrlParser: true })
